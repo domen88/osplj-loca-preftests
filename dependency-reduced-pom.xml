@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <parent>
+    <artifactId>parent-pom</artifactId>
+    <groupId>org.opensplice.osplj</groupId>
+    <version>2.0.0-SNAPSHOT</version>
+    <relativePath>../../parent-pom/pom.xml</relativePath>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.opensplice.osplj.tests</groupId>
+  <artifactId>perftests</artifactId>
+  <name>OpenSplice For Java perftests</name>
+  <description>Latency and throughput tests for OpenSplice For Java.</description>
+  <build>
+    <resources>
+      <resource>
+        <targetPath>${project.build.directory}</targetPath>
+        <filtering>true</filtering>
+        <directory>src/main/scripts</directory>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <groupId>org.opensplice.osplj</groupId>
+        <artifactId>idl2j</artifactId>
+        <version>${project.version}</version>
+        <executions>
+          <execution>
+            <id>idl-compile</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>idl-compile</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>2.1</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.6</version>
+        <executions>
+          <execution>
+            <id>process-test-classes</id>
+            <phase>process-test-classes</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <chmod />
+                <chmod />
+                <chmod />
+                <chmod />
+                <chmod />
+                <chmod />
+                <chmod />
+              </target>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+

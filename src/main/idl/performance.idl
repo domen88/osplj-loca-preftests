@@ -1,0 +1,39 @@
+/*
+ *                         OpenSplice For Java
+ *
+ *    This software and documentation are Copyright 2010 to 2013 PrismTech
+ *    Limited and its licensees. All rights reserved. See file:
+ *
+ *                           docs/LICENSE.html
+ *
+ *    for full copyright notice and license terms.
+ */
+module org {
+    module opensplice {
+        module demo {
+             module perf {
+                module gen {
+                typedef sequence<octet> Payload;
+
+                struct PerfData {
+                    long id;
+                    long long timestamp;
+                    Payload data;
+                };
+                #pragma keylist PerfData id
+
+                struct LocationAware {
+                     double longitude;
+                     double latitude;
+                };
+
+                struct PerfData__locationAware {
+                     LocationAware l;
+                     PerfData v;
+                };
+              };
+            };
+        };
+    };
+};
+

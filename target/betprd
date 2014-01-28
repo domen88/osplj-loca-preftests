@@ -1,0 +1,31 @@
+#!/bin/bash
+#
+#                          OpenSplice For Java
+#
+#    This software and documentation are Copyright 2010 to 2013 PrismTech
+#    Limited and its licensees. All rights reserved. See file:
+#
+#                           docs/LICENSE.html
+#
+#    for full copyright notice and license terms.
+#
+
+if [ $# -gt 0 ] && [ $1 == "-vmopts" ]
+then
+  shift
+  VMOPTS=$1
+  shift
+else
+  VMOPTS=
+fi
+
+COMMAND="java -cp ./perftests-2.0.0-SNAPSHOT.jar $VMOPTS -Dddsi.data.ers.heartbeat.responseDelay=0 -Dddsi.data.writers.acknack.responseDelay=0 -Dddsi.data.writers.heartbeat.period=0.01 -Dddsi.network.receiver.threadPool.size=3 -Dddsi.network.receiver.dataProcessor.threadPool.size=0 -Dddsi.network.receiver.acknackProcessor.threadPool.size=0 -Dddsi.timer.threadPool.size=1 -Ddds.listeners.useTransportThread=true -server org.opensplice.osplj.demo.perf.BestEffortThroughputDemoReader"
+
+if [ $# -gt 0 ] && [ $1 == "-bg" ]
+then 
+  shift
+  $COMMAND $* &
+  echo $! > pid
+else
+  $COMMAND $*
+fi
